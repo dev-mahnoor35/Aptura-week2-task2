@@ -399,3 +399,157 @@ div[class*="card"]:hover {
 .kpi-card:hover i.fa-globe {
   transform: scale(1.05);
 }
+
+/* ==========================================================
+   Full Width Grid & Card Alignment Fix (Dashboard & Analytics)
+   ========================================================== */
+
+/* 1. Force Grid Container to stretch full width without empty right space */
+.dashboard-grid,
+.analytics-grid,
+main.main-content > div:nth-of-type(2) {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important; /* Forces 3 equal columns */
+  gap: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Full-width cards (like Traffic History chart) */
+.full-width-card,
+.traffic-history-card {
+  grid-column: 1 / -1 !important; /* Spans across all 3 columns */
+  width: 100% !important;
+}
+
+/* 3. Responsive auto-fit for smaller screens */
+@media (max-width: 1024px) {
+  .dashboard-grid,
+  .analytics-grid,
+  main.main-content > div:nth-of-type(2) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid,
+  .analytics-grid,
+  main.main-content > div:nth-of-type(2) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Equals column widths for dashboard middle section */
+.dashboard-grid > div,
+.middle-cards-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* Forces equal width distribution */
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+/* Ensure all cards inside have identical height & box sizing */
+.dashboard-grid .kpi-card {
+  width: 100% !important;
+  height: 280px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 20px !important;
+}
+
+/* ==========================================================
+   Horizontal Scrollbar & Layout Overflow Fix
+   ========================================================== */
+
+/* 1. Prevent global horizontal scrollbar on body & html */
+html, body {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Contain Main Layout Container within available screen area */
+.main-content,
+main {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+/* ==========================================================
+   PERFECT 3-CARD EQUAL LAYOUT FIX (NO CUTOFF, NO SCROLL)
+   ========================================================== */
+
+/* 1. Reset Main Content Width Constraints */
+.main-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Responsive 3-Column Grid setup with auto-fit */
+.dashboard-grid,
+.analytics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 3. Ensure cards never overflow their columns */
+.kpi-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 4. Canvas Responsive Container Fix */
+.kpi-card canvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+}
+
+/* 5. Responsive Adjustment for Smaller Screens */
+@media (max-width: 1100px) {
+  .dashboard-grid,
+  .analytics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid,
+  .analytics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}/* Clean Grid & Middle Card Structure */
+.middle-cards-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Force containment inside card */
+.regional-card {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  height: 280px !important;
+}
+
+.regional-card * {
+  position: static !important; /* Disables stray absolute positioning */
+  float: none !important;
+}

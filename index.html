@@ -84,20 +84,37 @@
     <canvas id="visitorDistributionChart"></canvas>
   </div>
 </div>
+<!-- Regional Distribution Active Card -->
+<div class="kpi-card regional-card">
+  <h3 style="font-size: 1.1rem; font-weight: 600; margin: 0; color: var(--text-main);">
+    Regional Distribution Active
+  </h3>
 
-      <!-- Regional Map / Global Active Locations -->
-      <div class="glass-card">
-        <h3>Regional Distribution Active</h3>
-        <div class="regional-map-container" style="text-align:center; padding: 20px;">
-          <i class="fa-solid fa-earth-americas" style="font-size: 80px; color: #3b82f6; margin-bottom: 15px;"></i>
-          <p style="color:var(--text-muted);">Global Servers Active: <strong style="color:#10b981;">12 Locations</strong></p>
-          <div style="display:flex; justify-content:space-around; margin-top:15px; font-size:0.85rem;">
-            <span>🇺🇸 US: 42%</span>
-            <span>🇪🇺 EU: 31%</span>
-            <span>🇵🇰 PK/Asia: 27%</span>
-          </div>
-        </div>
-      </div>
+  <!-- Center Content Block -->
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin: 12px 0;">
+    <i class="fa-solid fa-earth-americas" style="font-size: 2.5rem; color: #3b82f6;"></i>
+    <div style="text-align: center;">
+      <span style="font-size: 0.85rem; color: var(--text-muted); display: block;">Global Servers Active</span>
+      <span style="font-size: 1rem; color: #10b981; font-weight: 600;">12 Locations</span>
+    </div>
+  </div>
+
+  <!-- Bottom Region Metrics Row -->
+  <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 10px; width: 100%;">
+    <div style="text-align: center; flex: 1;">
+      <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">US</span>
+      <strong style="font-size: 0.85rem; color: var(--text-main);">42%</strong>
+    </div>
+    <div style="text-align: center; flex: 1;">
+      <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">EU</span>
+      <strong style="font-size: 0.85rem; color: var(--text-main);">31%</strong>
+    </div>
+    <div style="text-align: center; flex: 1;">
+      <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">PK/Asia</span>
+      <strong style="font-size: 0.85rem; color: var(--text-main);">27%</strong>
+    </div>
+  </div>
+</div>
 
       <!-- Visitors by Type Chart -->
       <div class="glass-card">
