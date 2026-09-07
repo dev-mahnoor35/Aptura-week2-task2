@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevMetrics — System Preferences</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <button class="toggle-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+      <h2 class="logo-text">DevMetrics</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="nav-text">Dashboard</span></a></li>
+      <li class="nav-item"><a href="projects.html"><i class="fa-solid fa-filter"></i><span class="nav-text">Projects & Matrix</span></a></li>
+      <li class="nav-item"><a href="reports.html"><i class="fa-solid fa-file-lines"></i><span class="nav-text">Reports</span></a></li>
+      <li class="nav-item"><a href="settings.html" class="active"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></li>
+      <li class="nav-item"><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Analytics</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="top-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <div>
+        <h1 style="margin: 0;">System Preferences</h1>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">Configure environment keys, integrations, and developer preferences</p>
+      </div>
+      <button class="theme-toggle-btn" id="themeToggle"><i class="fa-solid fa-moon"></i> <span id="themeText">Dark Mode</span></button>
+    </header>
+
+    <!-- Sub-Navigation Tabs -->
+    <div style="display: flex; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; padding-bottom: 10px;">
+      <button style="background: none; border: none; color: #38bdf8; font-weight: 600; border-bottom: 2px solid #38bdf8; padding-bottom: 8px; cursor: pointer;"><i class="fa-solid fa-sliders"></i> General Controls</button>
+      <button style="background: none; border: none; color: var(--text-muted); font-weight: 500; padding-bottom: 8px; cursor: pointer;"><i class="fa-solid fa-code"></i> Developer & Webhooks</button>
+      <button style="background: none; border: none; color: var(--text-muted); font-weight: 500; padding-bottom: 8px; cursor: pointer;"><i class="fa-solid fa-shield-halved"></i> Security & Logs</button>
+    </div>
+
+    <!-- Cards Grid Structure -->
+    <form id="settingsForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+      <!-- Card 1: Configuration Control -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-sliders" style="color: #3b82f6;"></i> Configuration Control
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Platform Instance Name</label>
+          <input type="text" value="DevMetrics Core" style="padding: 8px 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; border-radius: 6px; color: var(--text-main); font-size: 0.85rem;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">API Integration Key</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="password" id="apiKey" value="dev_sec_993847x9281734" readonly style="flex: 1; padding: 8px 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; border-radius: 6px; color: var(--text-main); font-size: 0.85rem;">
+            <button type="button" onclick="toggleKey()" style="padding: 8px 12px; background: #374151; border: none; border-radius: 6px; color: white; cursor: pointer;"><i class="fa-solid fa-eye" id="eyeIcon"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Developer Profile -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-user-gear" style="color: #10b981;"></i> Developer Profile
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Developer Name</label>
+          <input type="text" value="Mahnoor Fatima" style="padding: 8px 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; border-radius: 6px; color: var(--text-main); font-size: 0.85rem;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Account Role</label>
+          <select style="padding: 8px 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; border-radius: 6px; color: var(--text-main); font-size: 0.85rem;">
+            <option value="lead" style="color:#000;">Lead Frontend Developer</option>
+            <option value="admin" style="color:#000;">System Administrator</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Card 3: Notifications & Alerts -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-bell" style="color: #f59e0b;"></i> Notifications & Alerts
+        </h3>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.85rem;">Email Audit Reports</span>
+          <input type="checkbox" checked style="width: 16px; height: 16px; cursor: pointer;">
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.85rem;">Real-time Traffic Spike Alerts</span>
+          <input type="checkbox" checked style="width: 16px; height: 16px; cursor: pointer;">
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.85rem;">Auto Cloud Backup</span>
+          <input type="checkbox" style="width: 16px; height: 16px; cursor: pointer;">
+        </div>
+      </div>
+
+      <!-- Card 4: Performance & Sync -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-gauge-high" style="color: #8b5cf6;"></i> Performance & Sync
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-size: 0.8rem; color: var(--text-muted);">Data Sync Interval</label>
+          <input type="range" min="5" max="60" value="15" oninput="this.nextElementSibling.value = this.value + 's'" style="accent-color: #3b82f6; cursor: pointer;">
+          <output style="font-size: 0.8rem; color: #38bdf8; text-align: right;">15s</output>
+        </div>
+        <button type="submit" style="padding: 8px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer;"><i class="fa-solid fa-floppy-disk"></i> Save Preferences</button>
+      </div>
+
+      <!-- Card 5: Webhooks & Integrations (NEW) -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-network-wired" style="color: #06b6d4;"></i> Active Webhooks
+        </h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+          <span>GitHub Actions CI</span>
+          <span style="color:#10b981; font-weight:600;"><i class="fa-solid fa-circle" style="font-size:6px; vertical-align:middle;"></i> Connected</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+          <span>Slack Alert Bot</span>
+          <span style="color:#10b981; font-weight:600;"><i class="fa-solid fa-circle" style="font-size:6px; vertical-align:middle;"></i> Active</span>
+        </div>
+        <button type="button" onclick="alert('Add Webhook modal opened')" style="padding: 8px; background: rgba(255,255,255,0.08); border: 1px solid #374151; color: var(--text-main); border-radius: 6px; cursor: pointer; font-size: 0.8rem;"><i class="fa-solid fa-plus"></i> Add New Integration</button>
+      </div>
+
+      <!-- Card 6: UI Theme Accent -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-palette" style="color: #ec4899;"></i> UI Theme Accent
+        </h3>
+        <div>
+          <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 8px;">Primary Brand Color</label>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <span style="width: 24px; height: 24px; background: #3b82f6; border-radius: 50%; cursor: pointer; border: 2px solid white;"></span>
+            <span style="width: 24px; height: 24px; background: #10b981; border-radius: 50%; cursor: pointer;"></span>
+            <span style="width: 24px; height: 24px; background: #8b5cf6; border-radius: 50%; cursor: pointer;"></span>
+            <span style="width: 24px; height: 24px; background: #ec4899; border-radius: 50%; cursor: pointer;"></span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.85rem;">Compact Sidebar View</span>
+          <input type="checkbox" style="width: 16px; height: 16px; cursor: pointer;">
+        </div>
+      </div>
+
+      <!-- Card 7: Security & Session -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-shield-halved" style="color: #38bdf8;"></i> Security & Session
+        </h3>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.85rem;">Two-Factor (2FA)</span>
+          <span style="background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight:600;">Enabled</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Active Session</span>
+          <span style="font-size: 0.8rem; color: var(--text-main);"><i class="fa-solid fa-laptop" style="margin-right: 4px;"></i> Chrome (Windows) — Current</span>
+        </div>
+      </div>
+
+      <!-- Card 8: Storage & System Danger Zone -->
+      <div class="kpi-card" style="flex-direction: column; align-items: stretch; justify-content: space-between; min-height: 220px;">
+        <h3 style="font-size: 1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-database" style="color: #f59e0b;"></i> Cache & Storage
+        </h3>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+            <span>Local Storage</span>
+            <span style="color: #38bdf8;">12.4 MB / 50 MB</span>
+          </div>
+          <div style="width: 100%; background: rgba(255,255,255,0.1); height: 6px; border-radius: 4px; overflow: hidden;">
+            <div style="width: 25%; background: #3b82f6; height: 100%;"></div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" onclick="alert('Cache Cleared')" style="flex:1; padding: 6px; background: rgba(255,255,255,0.08); border: 1px solid #374151; color: var(--text-main); border-radius: 6px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-broom"></i> Clear Cache</button>
+          <button type="button" onclick="confirm('Reset Settings?') && alert('Reset Done')" style="flex:1; padding: 6px; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; border-radius: 6px; cursor: pointer; font-size: 0.75rem;"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+        </div>
+      </div>
+
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

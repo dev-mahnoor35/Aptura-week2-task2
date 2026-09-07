@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevMetrics — Projects & Matrix</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <button class="toggle-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+      <h2 class="logo-text">DevMetrics</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="nav-text">Dashboard</span></a></li>
+      <li class="nav-item"><a href="projects.html" class="active"><i class="fa-solid fa-filter"></i><span class="nav-text">Projects & Matrix</span></a></li>
+      <li class="nav-item"><a href="reports.html"><i class="fa-solid fa-file-lines"></i><span class="nav-text">Reports</span></a></li>
+      <li class="nav-item"><a href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></li>
+      <li class="nav-item"><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Analytics</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="top-header">
+      <h1>Custom Project Analytics</h1>
+      <button class="theme-toggle-btn" id="themeToggle"><i class="fa-solid fa-moon"></i> <span id="themeText">Dark Mode</span></button>
+    </header>
+
+    <!-- Top Summary Widgets (Space Filling & Quick Analytics) -->
+    <div class="kpi-grid" style="margin-bottom: 20px;">
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-folder-open"></i></div>
+        <div>
+          <span class="kpi-title">Total Active Projects</span>
+          <h2 class="kpi-value" id="totalProjectsCount">0</h2>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div>
+          <span class="kpi-title">Combined Traffic</span>
+          <h2 class="kpi-value" id="combinedTrafficCount">0</h2>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div>
+          <span class="kpi-title">Top Performing Project</span>
+          <h2 class="kpi-value" id="topProjectName" style="font-size: 1.2rem;">-</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Project Form Section -->
+    <div class="glass-card" style="margin-bottom: 20px;">
+      <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-plus-circle"></i> Add New Project To Track</h3>
+      <form id="projectForm" style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <input type="text" id="pName" placeholder="Project Name (e.g. Mahnoor Cafe)" required style="flex:2; min-width:200px; padding:10px; background:rgba(255,255,255,0.05); border:1px solid #374151; color:var(--text-main); border-radius:6px;">
+        <input type="number" id="pTraffic" placeholder="Monthly Visitors" required style="flex:1; min-width:150px; padding:10px; background:rgba(255,255,255,0.05); border:1px solid #374151; color:var(--text-main); border-radius:6px;">
+        <select id="pCategory" style="padding:10px; background:rgba(255,255,255,0.05); border:1px solid #374151; color:var(--text-main); border-radius:6px;">
+          <option value="Web App" style="color:#000;">Web App</option>
+          <option value="AI Tool" style="color:#000;">AI Tool</option>
+          <option value="E-Commerce" style="color:#000;">E-Commerce</option>
+        </select>
+        <button type="submit" style="padding:10px 20px; background:#3b82f6; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600;"><i class="fa-solid fa-plus"></i> Add & Analyze</button>
+      </form>
+    </div>
+
+    <!-- Analytics Chart Section (Attractive Layout Addition) -->
+    <div class="glass-card" style="margin-bottom: 25px;">
+      <h3><i class="fa-solid fa-chart-bar"></i> Traffic Comparison Across Projects</h3>
+      <div style="height: 220px; margin-top: 15px;">
+        <canvas id="projectComparisonChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+      <h3>Managed Projects Matrix</h3>
+      <input type="text" id="projectSearch" placeholder="🔍 Search project..." style="padding: 8px 14px; background: rgba(255,255,255,0.05); border: 1px solid #374151; border-radius: 6px; color: var(--text-main); width: 220px;">
+    </div>
+
+    <!-- Projects Grid Container -->
+    <div id="projectCardsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;"></div>
+
+  </main>
+
+  <!-- Edit Project Modal Popup -->
+  <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; justify-content: center; align-items: center;">
+    <div class="glass-card" style="width: 90%; max-width: 420px; background: var(--card-bg, #111827); padding: 25px; border-radius: 12px;">
+      <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-pen-to-square"></i> Edit Project</h3>
+      <form id="editForm" style="display: flex; flex-direction: column; gap: 12px;">
+        <input type="hidden" id="editIndex">
+        <label style="font-size: 0.85rem; color: var(--text-muted);">Project Name</label>
+        <input type="text" id="editName" required style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; color: var(--text-main); border-radius: 6px;">
+        
+        <label style="font-size: 0.85rem; color: var(--text-muted);">Monthly Visitors</label>
+        <input type="number" id="editTraffic" required style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; color: var(--text-main); border-radius: 6px;">
+        
+        <label style="font-size: 0.85rem; color: var(--text-muted);">Category</label>
+        <select id="editCategory" style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid #374151; color: var(--text-main); border-radius: 6px;">
+          <option value="Web App" style="color:#000;">Web App</option>
+          <option value="AI Tool" style="color:#000;">AI Tool</option>
+          <option value="E-Commerce" style="color:#000;">E-Commerce</option>
+        </select>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px;">
+          <button type="button" onclick="closeEditModal()" style="padding: 8px 16px; background: #4b5563; color: #fff; border: none; border-radius: 6px; cursor: pointer;">Cancel</button>
+          <button type="submit" style="padding: 8px 16px; background: #10b981; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

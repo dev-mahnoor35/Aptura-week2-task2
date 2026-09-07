@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-main: #0b0f19;
+  --bg-card: #131b2e;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.4);
+  --sidebar-width: 250px;
+  --sidebar-collapsed: 75px;
+}
+
+[data-theme="light"] {
+  --bg-main: #f1f5f9;
+  --bg-card: #ffffff;
+  --border: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.25s, color 0.25s; }
+body { background: var(--bg-main); color: var(--text-primary); display: flex; min-height: 100vh; overflow-x: hidden; }
+
+/* Sidebar Layout */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar.collapsed .logo-text, .sidebar.collapsed .nav-text { display: none; }
+
+/* Hamburger Icon on LEFT of Brand Name */
+.brand { display: flex; align-items: center; gap: 14px; margin-bottom: 2.5rem; padding-left: 6px; }
+.brand h2 { font-size: 1.25rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.toggle-btn { background: none; border: none; color: var(--text-primary); font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* Clean List Without Bullets */
+.nav-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.nav-item { list-style-type: none; }
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-item a.active, .nav-item a:hover { background: var(--accent); color: #ffffff; box-shadow: 0 4px 14px var(--accent-glow); }
+
+/* Main Content Wrapper */
+.main-content { flex: 1; padding: 2rem 2.5rem; overflow-y: auto; }
+.top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+
+.theme-toggle-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+/* Dashboard Analytics Grid */
+.top-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; display: flex; align-items: center; gap: 1rem; }
+.icon-circle { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.1rem; }
+
+.analytics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.span-2 { grid-column: span 2; }
+.chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; min-height: 220px; }
+.chart-card h4 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+
+/* Visual Chart Mockups */
+.donut-mock {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: conic-gradient(#06b6d4 0% 35%, #ec4899 35% 65%, #3b82f6 65% 100%);
+  margin: 10px auto; position: relative; display: flex; align-items: center; justify-content: center;
+}
+.donut-inner { width: 60px; height: 60px; background: var(--bg-card); border-radius: 50%; }
+
+.bars-mock { display: flex; align-items: flex-end; justify-content: space-around; height: 130px; padding-top: 20px; }
+.bar-group { display: flex; gap: 4px; align-items: flex-end; }
+.bar { width: 12px; border-radius: 4px 4px 0 0; }
+
+/* Data Table Styling for Matrix & Logs */
+.glass-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+.table-container { overflow-x: auto; margin-top: 1rem; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+th { color: var(--text-muted); font-weight: 500; }
+.blue-badge { background: rgba(37, 99, 235, 0.2); color: #93c5fd; border: 1px solid var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; }
+
+
+/* KPI Cards Side-by-Side Grid Layout */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* Glass Card Structure & Base Transition */
+.kpi-card {
+  position: relative;
+  background: var(--card-bg, #111827);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible; /* Dynamic Glow Visible Rakhne Ke Liye */
+  z-index: 1;
+}
+
+/* Card Icons Setup */
+.kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* 💡 HOVER BULB GLOW EFFECT (Dark Theme) */
+[data-theme="dark"] .kpi-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(56, 189, 248, 0.6);
+  /* Card k peeche sy bulb ki tarah light nikalne ke liye radial glow */
+  box-shadow: 
+    0 0 25px rgba(56, 189, 248, 0.45),
+    0 0 60px rgba(59, 130, 246, 0.35),
+    0 0 100px rgba(139, 92, 246, 0.25);
+}
+
+[data-theme="dark"] .kpi-card:hover .kpi-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 0 15px #3b82f6;
+}
+
+/* ☀️ HOVER BULB GLOW EFFECT (Light Theme) */
+[data-theme="light"] .kpi-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 
+    0 10px 30px rgba(37, 99, 235, 0.25),
+    0 0 50px rgba(96, 165, 250, 0.35),
+    0 0 80px rgba(147, 197, 253, 0.2);
+}
+
+[data-theme="light"] .kpi-card:hover .kpi-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+/* Badge Styles */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 6px;
+  color: #38bdf8;
+}
+
+.live-badge.green {
+  color: #10b981;
+}
+
+.live-badge i {
+  font-size: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* ==========================================================
+   KPI Cards Text Fix & Dynamic Bulb Glow Hover Effect
+   ========================================================== */
+
+/* 1. Base KPI Grid Layout */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* 2. Glass Card Base Styling */
+.kpi-card {
+  position: relative;
+  background: var(--card-bg, #111827);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.35s ease-in-out;
+  z-index: 1;
+}
+
+/* 3. Text Visibility Fix for Light & Dark Modes */
+.kpi-card .kpi-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted, #9ca3af) !important;
+}
+
+.kpi-card .kpi-value {
+  margin: 4px 0 0 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main, #ffffff) !important; /* Forces text to be visible */
+}
+
+/* Light Theme Card Background & Text Contrast Fix */
+[data-theme="light"] .kpi-card {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .kpi-card .kpi-value {
+  color: #1f2937 !important; /* Visible Dark Numbers in Light Mode */
+}
+
+[data-theme="light"] .kpi-card .kpi-title {
+  color: #6b7280 !important;
+}
+
+/* Icon Box Setup */
+.kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================
+   💡 BULB LIGHT GLOW EFFECT (Card ke peeche se roshni)
+   ========================================================== */
+
+/* Pseudo-element for Glowing Light Source behind Card */
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(0.8);
+  border-radius: 20px;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.4s ease-in-out;
+  filter: blur(25px);
+}
+
+/* 🌙 DARK MODE: Glowing Blue/Cyan Bulb Light Effect */
+[data-theme="dark"] .kpi-card::before {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.9) 0%, rgba(59, 130, 246, 0.6) 50%, rgba(139, 92, 246, 0) 100%);
+}
+
+[data-theme="dark"] .kpi-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(56, 189, 248, 0.8) !important;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
+}
+
+[data-theme="dark"] .kpi-card:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.15); /* Light expands out */
+}
+
+/* ☀️ LIGHT MODE: Warm Vibrant Blue Bulb Light Effect */
+[data-theme="light"] .kpi-card::before {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(147, 197, 253, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+[data-theme="light"] .kpi-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(37, 99, 235, 0.6) !important;
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="light"] .kpi-card:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* Icon Pop Effect on Hover */
+.kpi-card:hover .kpi-icon {
+  transform: scale(1.15) rotate(6deg);
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px #3b82f6;
+}
+/* ==========================================================
+   Card Glow Effect Fix (Soft & Subtle Modern Glow)
+   ========================================================== */
+
+/* 1. Base KPI Card Reset */
+.kpi-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: #111827 !important; /* Clean Dark Background */
+  transition: all 0.3s ease-in-out;
+}
+
+/* 2. Soft & Professional Hover Effect Across All Pages */
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  /* Extremely subtle blue accent glow instead of harsh back-light */
+  box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15),
+              0 0 10px rgba(59, 130, 246, 0.08) !important;
+}
+
+/* 3. Remove Any Heavy Pseudo Elements (Before/After Glow Overlays) */
+.kpi-card::before,
+.kpi-card::after {
+  display: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* ==========================================================
+   Dashboard Cards Hover & Transition Effects
+   ========================================================== */
+
+/* 1. Ensure smooth animation for all dashboard cards */
+.kpi-card,
+div[class*="card"] {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease !important;
+  will-change: transform, box-shadow;
+}
+
+/* 2. Soft & Modern Hover Effect on Mouse Over */
+.kpi-card:hover,
+div[class*="card"]:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3),
+              0 0 12px rgba(59, 130, 246, 0.12) !important;
+}
+
+/* 3. Globe Icon subtle animation on hover (Regional Card) */
+.kpi-card:hover .fa-globe,
+.kpi-card:hover svg,
+.kpi-card:hover i {
+  transition: transform 0.3s ease;
+}
+
+.kpi-card:hover i.fa-earth-americas,
+.kpi-card:hover i.fa-globe {
+  transform: scale(1.05);
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevMetrics — Audit & System Reports</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <button class="toggle-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+      <h2 class="logo-text">DevMetrics</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="nav-text">Dashboard</span></a></li>
+      <li class="nav-item"><a href="projects.html"><i class="fa-solid fa-filter"></i><span class="nav-text">Projects & Matrix</span></a></li>
+      <li class="nav-item"><a href="reports.html" class="active"><i class="fa-solid fa-file-lines"></i><span class="nav-text">Reports</span></a></li>
+      <li class="nav-item"><a href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></li>
+      <li class="nav-item"><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Analytics</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="top-header">
+      <h1>Audit & System Reports</h1>
+      <button class="theme-toggle-btn" id="themeToggle"><i class="fa-solid fa-moon"></i> <span id="themeText">Dark Mode</span></button>
+    </header>
+
+    <!-- Top KPI Highlights -->
+    <div class="kpi-grid" style="margin-bottom: 20px;">
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <span class="kpi-title">System Health Score</span>
+          <h2 class="kpi-value" style="color: #10b981 !important;">99.8%</h2>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-file-pdf"></i></div>
+        <div>
+          <span class="kpi-title">Total Reports Generated</span>
+          <h2 class="kpi-value">142</h2>
+        </div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div>
+          <span class="kpi-title">Security Warnings</span>
+          <h2 class="kpi-value" style="color: #f59e0b !important;">0 Critical</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Dossier Card -->
+    <div class="kpi-card" style="flex-direction: column; align-items: flex-start; margin-bottom: 20px;">
+      <span style="background: rgba(59,130,246,0.15); color: #3b82f6; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">[ Audit Dossier ]</span>
+      <h3 style="margin: 10px 0 5px 0;">Infrastructure Scalability Log</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">All rendering engines operating at maximum efficiency with zero external runtime frame dependencies. Glassmorphic shaders and 3D layered elevation pass cross-browser GPU stress testing.</p>
+    </div>
+
+    <!-- Report Custom Export Generator Bar -->
+    <div class="kpi-card" style="flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+      <div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 4px;"><i class="fa-solid fa-sliders"></i> Generate Custom Audit Export</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Select timeframe and module parameters to download logs.</p>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <select style="padding: 9px 12px; background: rgba(255,255,255,0.05); border: 1px solid #374151; color: var(--text-main); border-radius: 6px;">
+          <option value="last30">Last 30 Days</option>
+          <option value="last7">Last 7 Days</option>
+          <option value="all">Full Historical Log</option>
+        </select>
+        <button onclick="triggerExport('PDF')" style="padding: 9px 16px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+        <button onclick="triggerExport('CSV')" style="padding: 9px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+      </div>
+    </div>
+
+    <!-- Available Reports Table Section -->
+    <div class="kpi-card" style="flex-direction: column; align-items: stretch;">
+      <h3 style="margin-bottom: 15px; font-size: 1.1rem;"><i class="fa-solid fa-list-check"></i> Historical Audit Logs & Security Reports</h3>
+      
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);">
+              <th style="padding: 12px;">Report Name</th>
+              <th style="padding: 12px;">Category</th>
+              <th style="padding: 12px;">Date Generated</th>
+              <th style="padding: 12px;">Status</th>
+              <th style="padding: 12px; text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px; font-weight: 600;"><i class="fa-solid fa-shield-check" style="color:#10b981; margin-right:8px;"></i> Security Vulnerability Audit</td>
+              <td style="padding: 12px; color: var(--text-muted);">Security</td>
+              <td style="padding: 12px;">Sep 05, 2026</td>
+              <td style="padding: 12px;"><span style="background: rgba(16,185,129,0.15); color: #10b981; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem;">Passed</span></td>
+              <td style="padding: 12px; text-align: right;"><button onclick="triggerExport('Security Report')" style="background:none; border:none; color:#3b82f6; cursor:pointer;"><i class="fa-solid fa-download"></i> Download</button></td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px; font-weight: 600;"><i class="fa-solid fa-gauge-high" style="color:#3b82f6; margin-right:8px;"></i> Frontend Performance Metrics</td>
+              <td style="padding: 12px; color: var(--text-muted);">Performance</td>
+              <td style="padding: 12px;">Sep 01, 2026</td>
+              <td style="padding: 12px;"><span style="background: rgba(59,130,246,0.15); color: #3b82f6; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem;">Optimal</span></td>
+              <td style="padding: 12px; text-align: right;"><button onclick="triggerExport('Performance Report')" style="background:none; border:none; color:#3b82f6; cursor:pointer;"><i class="fa-solid fa-download"></i> Download</button></td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 12px; font-weight: 600;"><i class="fa-solid fa-network-wired" style="color:#f59e0b; margin-right:8px;"></i> API Rate Limit & Traffic Dossier</td>
+              <td style="padding: 12px; color: var(--text-muted);">Network</td>
+              <td style="padding: 12px;">Aug 28, 2026</td>
+              <td style="padding: 12px;"><span style="background: rgba(245,158,11,0.15); color: #f59e0b; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem;">Reviewed</span></td>
+              <td style="padding: 12px; text-align: right;"><button onclick="triggerExport('API Dossier')" style="background:none; border:none; color:#3b82f6; cursor:pointer;"><i class="fa-solid fa-download"></i> Download</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

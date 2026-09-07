@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevMetrics — SEO Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN for Graphical Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <button class="toggle-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+      <h2 class="logo-text">DevMetrics</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="index.html" class="active"><i class="fa-solid fa-house"></i><span class="nav-text">Dashboard</span></a></li>
+      <li class="nav-item"><a href="projects.html"><i class="fa-solid fa-filter"></i><span class="nav-text">Projects & Matrix</span></a></li>
+      <li class="nav-item"><a href="reports.html"><i class="fa-solid fa-file-lines"></i><span class="nav-text">Reports</span></a></li>
+      <li class="nav-item"><a href="settings.html"><i class="fa-solid fa-gear"></i><span class="nav-text">Settings</span></a></li>
+      <li class="nav-item"><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span class="nav-text">Analytics</span></a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-header">
+      <h1>SEO Analytics Dashboard</h1>
+      <button class="theme-toggle-btn" id="themeToggle"><i class="fa-solid fa-moon"></i> <span id="themeText">Dark Mode</span></button>
+    </header>
+
+   <!-- Redesigned Grid Section with Dynamic Glow Cards -->
+<div class="kpi-grid">
+  
+  <!-- Session Card -->
+  <div class="kpi-card">
+    <div class="kpi-icon">
+      <i class="fa-solid fa-rotate-right"></i>
+    </div>
+    <div>
+      <span class="kpi-title" style="color: var(--text-muted); font-size: 0.85rem;">Session</span>
+      <h2 class="kpi-value" id="session-count" style="margin: 4px 0 0 0; font-size: 1.6rem; font-weight: 700;">124,453</h2>
+    </div>
+  </div>
+
+  <!-- Active Users Card -->
+  <div class="kpi-card">
+    <div class="kpi-icon">
+      <i class="fa-solid fa-user"></i>
+    </div>
+    <div>
+      <span class="kpi-title" style="color: var(--text-muted); font-size: 0.85rem;">Active Users</span>
+      <h2 class="kpi-value" id="users-count" style="margin: 4px 0 0 0; font-size: 1.6rem; font-weight: 700;">64,508</h2>
+      <span class="live-badge"><i class="fa-solid fa-circle"></i> Live Updating</span>
+    </div>
+  </div>
+
+  <!-- Total Views Card -->
+  <div class="kpi-card">
+    <div class="kpi-icon">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <div>
+      <span class="kpi-title" style="color: var(--text-muted); font-size: 0.85rem;">Total Views</span>
+      <h2 class="kpi-value" id="views-count" style="margin: 4px 0 0 0; font-size: 1.6rem; font-weight: 700;">442,365</h2>
+      <span class="live-badge green"><i class="fa-solid fa-arrow-up"></i> +1 Visit</span>
+    </div>
+  </div>
+
+</div>
+
+    <!-- Graphical Charts & Regional Map Grid -->
+    <div class="charts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+      
+    <!-- Active Visitors Distribution Card -->
+<div class="kpi-card" style="flex-direction: column; align-items: stretch; height: 300px; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+    <h3 style="font-size: 1.1rem; font-weight: 600; margin: 0;">Active Visitors Distribution</h3>
+    <span style="font-size: 0.75rem; color: #10b981; font-weight: 600;"><i class="fa-solid fa-circle" style="font-size: 7px; margin-right: 3px;"></i> Realtime</span>
+  </div>
+  
+  <div style="position: relative; flex: 1; min-height: 0; display: flex; justify-content: center; align-items: center;">
+    <canvas id="visitorDistributionChart"></canvas>
+  </div>
+</div>
+
+      <!-- Regional Map / Global Active Locations -->
+      <div class="glass-card">
+        <h3>Regional Distribution Active</h3>
+        <div class="regional-map-container" style="text-align:center; padding: 20px;">
+          <i class="fa-solid fa-earth-americas" style="font-size: 80px; color: #3b82f6; margin-bottom: 15px;"></i>
+          <p style="color:var(--text-muted);">Global Servers Active: <strong style="color:#10b981;">12 Locations</strong></p>
+          <div style="display:flex; justify-content:space-around; margin-top:15px; font-size:0.85rem;">
+            <span>🇺🇸 US: 42%</span>
+            <span>🇪🇺 EU: 31%</span>
+            <span>🇵🇰 PK/Asia: 27%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visitors by Type Chart -->
+      <div class="glass-card">
+        <h3>Visitors by Type</h3>
+        <canvas id="visitorsTypeChart" style="max-height: 220px;"></canvas>
+      </div>
+
+    </div>
+
+    <!-- Traffic History Full Width Chart -->
+    <div class="glass-card" style="margin-top: 20px;">
+      <h3>Traffic History Over Time</h3>
+      <canvas id="trafficHistoryChart" style="max-height: 250px;"></canvas>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
